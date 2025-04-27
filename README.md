@@ -36,7 +36,7 @@ This should also work if we put the classes, as it is, in nativeMain (iOS) and d
 Again it works out of box and 
 
 ### Cons
-
+Repository classes are used in UI and domain layer, so we need a lot of refactoring at each layer to handle the paging. 
 
 ## Idea 3
 Refactor code to support Kotlin Multiplatform for all platforms. 
@@ -335,3 +335,17 @@ Easier to implement compared to the other ideas.
 
 ### Cons
 UI layer uses paging library to fetch data, that would require a lot of refactoring code in the UI layer, both screen as well as ViewModel.
+
+## Idea 4
+Use mockups for the classes of paging 3 used in the repository, repository implemenation and paging sources. This way the compiler checks if classes used in the commonMain are available for all targets and when it finds those mockups, it doesn't complain about resolving to wasmJS and JS. We can impleement paging functionality for those platforms in a separate Jira ticket. 
+
+Idea 4 is currently implemented in the PR draft [refactor(:core:data): Migrate to KMP](https://github.com/openMF/android-client/pull/2364)
+
+## Idea 5
+Implement expect/ actual classes in an interface for the paging source.
+
+## Pros
+Seems doable at first, however, see Cons.
+
+## Cons
+The return data type is a class from the paging 3 library, how do we handle that. Mr. Pronay suggested to use `Any` as return type in place of `PagingData`, however, we need to refactor the UI layer as well the domain layers codes that using paging 3 library.
