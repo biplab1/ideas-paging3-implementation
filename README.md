@@ -1,4 +1,4 @@
-# ideas-paging3-implementation
+# Ideas for Handling Paging 3 Implementation for Kotlin Multiplatform
 List of ideas to incorporate/ remove paging 3 from Mifos android-client app (mifos-x-field-officer-app)
 
 ## Introduction
