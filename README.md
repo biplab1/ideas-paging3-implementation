@@ -12,25 +12,27 @@ Our project requires building for 5 platforms- android, iOS, desktop, JS and was
 Paging 3 doesn't support web (JS and wasmJS)
 
 ## Idea 1
-Do not build targets for the web currently, Paging 3 componenst will work as it is out of the box. 
+Do not build targets for the web currently, Paging 3 components will work as it is out of the box. 
 ### Pros
 Data layer becomes ready to merge without much work
 
 ### Cons
-If we try to incorporate the web targets in the future, one needs to resolve the paging 3 error since it does not support the web for now. 
+If we incorporate the web targets in the future, one needs to resolve the paging 3 error since it does not support the web for now. 
 
 ## Idea 2
 Put all the paging 3 library using classes in the androidMain- pagingSource, repository, repositoryImpl. We focus on android app only so that we can get the features migrated to CMP. 
 
-This should also work if we put the classes as it is in nativeMain (iOS) and desktopMain, but lot of code repetition. One workaround would be to create a sharedNativeMain, which has all those classes and androidMain, nativeMain and desktopMain simply use it from there avoiding code repetition.
+This should also work if we put the classes, as it is, in nativeMain (iOS) and desktopMain, but lot of code repetition. One workaround would be to create a sharedNativeMain, which has all those classes and androidMain, nativeMain and desktopMain simply use it from there avoiding code repetition.
 
 ### Steps for implementation
 <ol>
-  <li>Move classes using related to or using paging library to androidMain</li>
-  <li>Move part of koin module initiation of the repository implmentation using paging 3 library to androidMain (not yet tried), since DI in commonMain cannot see the </li>
+  <li>Move classes that related to or using paging library to androidMain</li>
+  <li>Move part of koin module initiation of the repository implmentation (`RepositoryModule.kt`) using paging 3 library to androidMain (not yet tried), since DI in commonMain cannot see the repository and its implementation in </li>
   <li></li>
 </ol>
+
 ### Pros
+
 Again it works out of box and 
 
 ### Cons
